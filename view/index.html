@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<title>Safety Cap</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta content="text/html; charset=UTF-8" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!-- Optional theme -->
+<!-- Latest compiled and minified JavaScript -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<style type="text/css">
+body {
+    background-color: #669084;
+    font-weight: bold;
+    color: gray;
+}
+
+h1 {
+    color: white;
+}
+</style>
+
+<body>
+    <audio id="audio" style="display:hidden;">
+        <source src="a.wav" type="audio/wav">
+        <source src="horse.mp3" type="audio/mpeg"> Your browser does not support the audio element.
+    </audio>
+    <h1 style="text-align:center; margin-top: 30px;margin-bottom: 30px;">Safety Cap</h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                <button type="button" id="fire" style="height: 100px;" class="btn bg-success btn-lg btn-block">Fire Alarm</button>
+                <button type="button" id="falling" style="margin-top: 20px; height: 100px;" class="btn btn-lg btn-block bg-success">Falling Alarm</button>
+                <button type="button" id="emerg" style="margin-top: 20px; height: 100px;" class="btn bg-success btn-lg btn-block">Emergency</button>
+            </div>
+            <div class="col-xs-5"></div>
+            <div class="col-xs-2">
+            </div>
+            <div class="col-xs-5"></div>
+        </div>
+    </div>
+</body>
+<!-- socket.io  라이브러리 -->
+<script src="http://localhost:8000/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+var socket = io.connect('http://localhost:8000'); //소캣 연결 시작 
+var $park = null;
+var OFF_TIME = 1000 * 10; // 자동 off 딜레이 
+socket.on('connect', function() {
+    socket.on('alarm-check', function(data) {
+        if (data.result == 'ok') {
+            var sensorValue = data.msg;
+
+            if (sensorValue.indexOf("fire-on") > -1) {
+                var $fire = $("#fire");
+                $fire.removeClass("bg-success").addClass("bg-danger");
+                var sound = document.getElementById('audio');
+                sound.pause(); //just bind play/pause to some onclick events on your page
+                sound.play();
+                autoOff($fire);
+
+            } else if (data.msg.indexOf("falling-on") > -1) {
+                var $falling = $("#falling");
+                $falling.removeClass("bg-success").addClass("bg-danger");
+                var sound = document.getElementById('audio');
+                sound.pause(); //just bind play/pause to some onclick events on your page
+                sound.play();
+                autoOff($falling);
+            } else if (data.msg.indexOf("emerg-on") > -1) {
+                var $emerg = $("#emerg");
+                $emerg.removeClass("bg-success").addClass("bg-danger");
+                var sound = document.getElementById('audio');
+                sound.pause(); //just bind play/pause to some onclick events on your page
+                sound.play();
+                autoOff($emerg);
+            }
+
+
+        }
+
+    });
+
+});
+
+
+
+function autoOff($item) {
+    setTimeout(function() {
+        $item.removeClass("bg-danger").addClass("bg-success");
+    }, OFF_TIME);
+}
+
+</script>
+
+</html>
