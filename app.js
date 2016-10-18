@@ -86,7 +86,7 @@ var mSocket = null;
     /**
      * 웹 서버 구동 시작
      */
-    http.createServer(app).listen(8888, function() {
+    http.createServer(app).listen(3000, function() {
         log.warn('서버 start');
     });
 
