@@ -46,9 +46,9 @@ h1 {
     </div>
 </body>
 <!-- socket.io  라이브러리 -->
-<script src="http://localhost:8000/socket.io/socket.io.js"></script>
+<script src="http://localhost:3000/socket.io/socket.io.js"></script>
 <script type="text/javascript">
-var socket = io.connect('http://localhost:8000'); //소캣 연결 시작 
+var socket = io.connect('http://localhost:3000'); //소캣 연결 시작 
 var $park = null;
 var OFF_TIME = 1000 * 10; // 자동 off 딜레이 
 socket.on('connect', function() {

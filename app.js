@@ -6,8 +6,11 @@ trim = require('trim'), // 트림 임포트
     log = require('color-log'), // 칼라로그    
     readline = require('readline');
 app = express(),
+server = http.createServer(app).listen(process.env.PORT || 3000, function() {
+        log.warn('서버 start');
+    }),
     bodyParser = require('body-parser'),
-    io = require('socket.io').listen(8000); // 실시간 통신을 위한 socket.io
+    io = require('socket.io').listen(server); // 실시간 통신을 위한 socket.io
 
 
 log.warn('start launch  ');
@@ -86,9 +89,6 @@ var mSocket = null;
     /**
      * 웹 서버 구동 시작
      */
-    http.createServer(app).listen(3000, function() {
-        log.warn('서버 start');
-    });
 
 
 })();
