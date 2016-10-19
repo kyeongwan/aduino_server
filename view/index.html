@@ -26,7 +26,7 @@ h1 {
 </style>
 
 <body>
-    <audio id="audio" style="display:hidden;">
+    <audio id="audio">
         <source src="a.wav" type="audio/wav">
         <source src="horse.mp3" type="audio/mpeg"> Your browser does not support the audio element.
     </audio>
@@ -51,6 +51,11 @@ h1 {
 var socket = io.connect("https://aduino.herokuapp.com/"); //소캣 연결 시작 
 var $park = null;
 var OFF_TIME = 1000 * 10; // 자동 off 딜레이 
+var button = document.getElementById('fire');
+button.addEventListener('click', function() {
+    var sound = document.getElementById('audio');
+    sound.load();
+}false);
 socket.on('connect', function() {
     socket.on('alarm-check', function(data) {
         if (data.result == 'ok') {
