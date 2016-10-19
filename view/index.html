@@ -55,7 +55,7 @@ var button = document.getElementById('fire');
 button.addEventListener('click', function() {
     var sound = document.getElementById('audio');
     sound.load();
-}false);
+}, false);
 socket.on('connect', function() {
     socket.on('alarm-check', function(data) {
         if (data.result == 'ok') {
