@@ -88,7 +88,7 @@ h1 {
     <span class="close">X</span>
     <div align="center">
         <h3>Welcome to Visit Safe Cap</h3>
-        <h5>This message will disappear when you touch anywhere.</h5>
+        <h5>This message will disappear when you touch me.</h5>
     </div>
   </div>
   </dix>
@@ -107,16 +107,8 @@ var OFF_TIME = 1000 * 10; // 자동 off 딜레이
 
 var modal = document.getElementById('dialog');
 
-window.onclick = function(event) {
-    console.log(event.target);
-    if (event.target == modal) {
-        modal.style.display = "none";
-        var sound = document.getElementById('audio');
-        sound.load();
-    }
-}
-
 modal.addEventListener('click', function() {
+    modal.style.display = "none";
     var sound = document.getElementById('audio');
     sound.load();
     console.log("modal touch");
@@ -125,10 +117,6 @@ modal.addEventListener('click', function() {
 var span = document.getElementsByClassName("close")[0];
 modal.style.display = "block";
 
-btn.onclick = function() {
-    modal.style.display = "block";
-    
-}
 
 var socket = io.connect("http://aduino.herokuapp.com/"); //소캣 연결 시작 
 
