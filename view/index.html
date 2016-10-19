@@ -97,9 +97,6 @@ h1 {
 </body>
 <!-- socket.io  라이브러리 -->
 <script src="/socket.io/socket.io.js"></script>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="http://code.jquery.com/jquery.min.js"></script>
-<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <script type="text/javascript">
 
 var $park = null;
@@ -117,6 +114,12 @@ modal.addEventListener('click', function() {
 var span = document.getElementsByClassName("close")[0];
 modal.style.display = "block";
 
+span.addEventListener('click', function() {
+    modal.style.display = "none";
+    var sound = document.getElementById('audio');
+    sound.load();
+    console.log("modal touch");
+}, false);
 
 var socket = io.connect("http://aduino.herokuapp.com/"); //소캣 연결 시작 
 
