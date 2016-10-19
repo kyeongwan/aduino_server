@@ -44,6 +44,15 @@ h1 {
             <div class="col-xs-5"></div>
         </div>
     </div>
+    <a href="#openModal">Open Modal</a>
+    <div id="openModal" class="modalDialog">
+    <div>
+        <a href="#close" title="Close" class="close">X</a>
+        <h2>Modal Box</h2>
+        <p>This is a sample modal box that can be created using the powers of CSS3.</p>
+        <p>You could do a lot of things here like have a pop-up ad that shows when your website loads, or create a login/register form for users.</p>
+    </div>
+</div>
 </body>
 <!-- socket.io  라이브러리 -->
 <script src="/socket.io/socket.io.js"></script>
@@ -56,6 +65,7 @@ button.addEventListener('click', function() {
     var sound = document.getElementById('audio');
     sound.load();
 }, false);
+$('a#openModal').click();
 socket.on('connect', function() {
     socket.on('alarm-check', function(data) {
         if (data.result == 'ok') {
