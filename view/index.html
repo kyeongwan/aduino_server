@@ -149,6 +149,9 @@ warning.addEventListener('click', function() {
     console.log("warning touch");
     times = 0;
     clearInterval(loop);
+    autoOff($fire);
+    autoOff($falling);
+    autoOff($emerg);
 }, false);
 
 var span = document.getElementsByClassName("close")[0];
