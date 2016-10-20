@@ -103,23 +103,23 @@
 var OFF_TIME = 1000 * 10; // 자동 off 딜레이 
 
 var modal = document.getElementById('dialog');
+var times = 1;
+var loop;
+var sound = document.getElementById('audio');
 
 modal.addEventListener('click', function() {
     modal.style.display = "none";
-    var sound = document.getElementById('audio');
     sound.load();
     console.log("modal touch");
     times = 0;
     clearInterval(loop);
 }, false);
-var times = 1;
-var loop;
+
 var span = document.getElementsByClassName("close")[0];
 modal.style.display = "block";
 
 span.addEventListener('click', function() {
     modal.style.display = "none";
-    var sound = document.getElementById('audio');
     sound.load();
     console.log("modal touch");
     times = 0;
@@ -141,7 +141,7 @@ socket.on('connect', function() {
             if (sensorValue.indexOf("fire-on") > -1) {
                 var $fire = $("#fire");
                 $fire.removeClass("bg-success").addClass("bg-danger");
-                var sound = document.getElementById('audio');
+
                 sound.pause(); //just bind play/pause to some onclick events on your page
                 sound.play();
                 //autoOff($fire);
@@ -157,7 +157,7 @@ socket.on('connect', function() {
             } else if (data.msg.indexOf("falling-on") > -1) {
                 var $falling = $("#falling");
                 $falling.removeClass("bg-success").addClass("bg-danger");
-                var sound = document.getElementById('audio');
+            
                 sound.pause(); //just bind play/pause to some onclick events on your page
                 sound.play();
                 //autoOff($falling);
@@ -168,7 +168,7 @@ socket.on('connect', function() {
             } else if (data.msg.indexOf("emerg-on") > -1) {
                 var $emerg = $("#emerg");
                 $emerg.removeClass("bg-success").addClass("bg-danger");
-                var sound = document.getElementById('audio');
+            
                 sound.pause(); //just bind play/pause to some onclick events on your page
                 sound.play();
 
