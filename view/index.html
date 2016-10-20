@@ -111,6 +111,7 @@ modal.addEventListener('click', function() {
     console.log("modal touch");
 }, false);
 var times = 1;
+var loop = setInterval(repeat, 3000);
 var span = document.getElementsByClassName("close")[0];
 modal.style.display = "block";
 
@@ -138,11 +139,12 @@ socket.on('connect', function() {
                 sound.play();
                 autoOff($fire);
 
-                var loop = setInterval(repeat, 3000);
+                loop = setInterval(repeat, 3000);
                 times = 1;
                 function repeat() {
                     console.log(times);
                     if (times === 0) {
+                        console.log("clear");
                         clearInterval(loop);
                     }
                     sound.play();
@@ -161,7 +163,7 @@ socket.on('connect', function() {
                 sound.play();
                 autoOff($falling);
 
-                var loop = setInterval(repeat, 3000);
+                loop = setInterval(repeat, 3000);
                 times = 1;
                 function repeat() {
                     console.log(times);
@@ -180,7 +182,7 @@ socket.on('connect', function() {
                 sound.play();
                 autoOff($emerg);
 
-                var loop = setInterval(repeat, 3000);
+                loop = setInterval(repeat, 3000);
                 times = 1;
                 function repeat() {
                     console.log(times);
