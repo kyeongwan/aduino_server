@@ -120,6 +120,7 @@ span.addEventListener('click', function() {
     sound.load();
     console.log("modal touch");
     times = 0;
+    clearInterval(loop);
 }, false);
 
 var socket = io.connect("http://aduino.herokuapp.com/"); //소캣 연결 시작 
