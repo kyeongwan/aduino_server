@@ -126,6 +126,11 @@ span.addEventListener('click', function() {
     clearInterval(loop);
 }, false);
 
+function repeat() {
+    console.log("repeat");
+    sound.play();
+}
+
 var socket = io.connect("http://aduino.herokuapp.com/"); //소캣 연결 시작 
 
 socket.on('connect', function() {
@@ -142,17 +147,8 @@ socket.on('connect', function() {
                 //autoOff($fire);
 
                 loop = setInterval(repeat, 3000);
-                times = 1;
-                function repeat() {
-                    console.log(times);
-                    if (times == 0) {
-                        console.log("clear");
-                        clearInterval(loop);
-                        autoOff($fire);
-                    }
-                    sound.play();
-                }
-                repeat();          
+            
+                //repeat();          
                 modal.style.display = "block";
 
 
@@ -167,16 +163,7 @@ socket.on('connect', function() {
                 //autoOff($falling);
 
                 loop = setInterval(repeat, 3000);
-                times = 1;
-                function repeat() {
-                    console.log(times);
-                    if (times == 0) {
-                        clearInterval(loop);
-                        autoOff($falling);
-                    }
-                    sound.play();
-                }
-                repeat();   
+            
                 modal.style.display = "block";  
             } else if (data.msg.indexOf("emerg-on") > -1) {
                 var $emerg = $("#emerg");
@@ -184,19 +171,10 @@ socket.on('connect', function() {
                 var sound = document.getElementById('audio');
                 sound.pause(); //just bind play/pause to some onclick events on your page
                 sound.play();
-            
+
 
                 loop = setInterval(repeat, 3000);
-                times = 1;
-                function repeat() {
-                    console.log(times);
-                    if (times == 0) {
-                        clearInterval(loop);
-                        autoOff($emerg);
-                    }
-                    sound.play();
-                }
-                repeat();     
+                    
                 modal.style.display = "block";
             }
 
