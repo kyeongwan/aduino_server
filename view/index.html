@@ -146,6 +146,7 @@
             console.log("modal touch");
             times = 0;
             clearInterval(loop);
+            loop = null;
         }, false);
 
         warning.addEventListener('click', function() {
@@ -154,6 +155,7 @@
             console.log("warning touch");
             times = 0;
             clearInterval(loop);
+            loop = null;
             autoOff($fire);
             autoOff($falling);
             autoOff($emerg);
@@ -169,6 +171,7 @@
             console.log("modal touch");
             times = 0;
             clearInterval(loop);
+            loop = null;
             autoOff($fire);
             autoOff($falling);
             autoOff($emerg);
@@ -180,6 +183,7 @@
             console.log("warning touch");
             times = 0;
             clearInterval(loop);
+            loop = null;
             autoOff($fire);
             autoOff($falling);
             autoOff($emerg);
@@ -204,8 +208,8 @@
                         sound.pause(); //just bind play/pause to some onclick events on your page
                         sound.play();
                         //autoOff($fire);
-
-                        loop = setInterval(repeat, 3000);
+                        if(!loop)
+                            loop = setInterval(repeat, 3000);
 
                         //repeat();          
                         warning.style.display = "block";
@@ -216,8 +220,8 @@
                         sound.pause(); //just bind play/pause to some onclick events on your page
                         sound.play();
                         //autoOff($falling);
-
-                        loop = setInterval(repeat, 3000);
+                        if(!loop)
+                            loop = setInterval(repeat, 3000);
 
                         warning.style.display = "block";  
                     } else if (data.msg.indexOf("emerg-on") > -1) {
@@ -226,8 +230,8 @@
                         sound.pause(); //just bind play/pause to some onclick events on your page
                         sound.play();
 
-
-                        loop = setInterval(repeat, 3000);
+                        if(!loop)
+                            loop = setInterval(repeat, 3000);
 
                         warning.style.display = "block";
                     }
