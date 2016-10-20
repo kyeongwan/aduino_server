@@ -141,6 +141,7 @@ socket.on('connect', function() {
 
                 function repeat() {
                     times--;
+                    console.log(time);
                     if (times === 0) {
                         clearInterval(loop);
                     }
