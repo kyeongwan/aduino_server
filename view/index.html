@@ -80,134 +80,6 @@
     </style>
 
 
-
-
-    
-    <!-- socket.io  라이브러리 -->
-    <script src="/socket.io/socket.io.js"></script>
-    <script type="text/javascript">
-
-        var $park = null;
-var OFF_TIME = 1000 * 10; // 자동 off 딜레이 
-
-var modal = document.getElementById('dialog');
-var warning = document.getElementById('dialog2');
-var times = 1;
-var loop;
-var sound = document.getElementById('audio');
-var $fire = $("#fire");
-var $falling = $("#falling");
-var $emerg = $("#emerg");
-
-modal.addEventListener('click', function() {
-    modal.style.display = "none";
-    sound.load();
-    console.log("modal touch");
-    times = 0;
-    clearInterval(loop);
-}, false);
-
-warning.addEventListener('click', function() {
-    warning.style.display = "none";
-    sound.load();
-    console.log("warning touch");
-    times = 0;
-    clearInterval(loop);
-    autoOff($fire);
-    autoOff($falling);
-    autoOff($emerg);
-}, false);
-
-var span = document.getElementsByClassName("close")[0];
-var span2 = document.getElementsByClassName("close2")[0];
-modal.style.display = "block";
-
-span.addEventListener('click', function() {
-    modal.style.display = "none";
-    sound.load();
-    console.log("modal touch");
-    times = 0;
-    clearInterval(loop);
-    autoOff($fire);
-    autoOff($falling);
-    autoOff($emerg);
-}, false);
-
-span2.addEventListener('click', function() {
-    warning.style.display = "none";
-    sound.load();
-    console.log("warning touch");
-    times = 0;
-    clearInterval(loop);
-    autoOff($fire);
-    autoOff($falling);
-    autoOff($emerg);
-}, false);
-
-function repeat() {
-    console.log("repeat");
-    sound.play();
-}
-
-var socket = io.connect("http://aduino.herokuapp.com/"); //소캣 연결 시작 
-
-socket.on('connect', function() {
-    socket.on('alarm-check', function(data) {
-        if (data.result == 'ok') {
-            var sensorValue = data.msg;
-
-            if (sensorValue.indexOf("fire-on") > -1) {
-
-                $fire.removeClass("bg-success").addClass("bg-danger");
-
-                sound.pause(); //just bind play/pause to some onclick events on your page
-                sound.play();
-                //autoOff($fire);
-
-                loop = setInterval(repeat, 3000);
-
-                //repeat();          
-                warning.style.display = "block";
-
-            } else if (data.msg.indexOf("falling-on") > -1) {
-                $falling.removeClass("bg-success").addClass("bg-danger");
-
-                sound.pause(); //just bind play/pause to some onclick events on your page
-                sound.play();
-                //autoOff($falling);
-
-                loop = setInterval(repeat, 3000);
-
-                warning.style.display = "block";  
-            } else if (data.msg.indexOf("emerg-on") > -1) {
-                $emerg.removeClass("bg-success").addClass("bg-danger");
-
-                sound.pause(); //just bind play/pause to some onclick events on your page
-                sound.play();
-
-
-                loop = setInterval(repeat, 3000);
-
-                warning.style.display = "block";
-            }
-
-
-        }
-
-    });
-
-});
-
-
-
-function autoOff($item) {
-    setTimeout(function() {
-        $item.removeClass("bg-danger").addClass("bg-success");
-    }, OFF_TIME);
-}
-
-</script>
-
     <body>
         <audio id="audio">
             <source src="a.wav" type="audio/wav">
@@ -226,7 +98,7 @@ function autoOff($item) {
                     <div class="col-xs-5"></div>
                 </div>
             </div>
-            <div id="dialog" class="modal">
+             <div id="dialog" class="modal">
                 <div class="modal-content">
                     <span class="close">X</span>
                     <div align="center">
@@ -234,7 +106,7 @@ function autoOff($item) {
                         <h6>This message will disappear when you touch me.</h6>
                     </div>
                 </div>
-            </dix>
+            </div>
 
             <div id="dialog2" class="warning">
                 <div class="modal-content">
@@ -243,8 +115,136 @@ function autoOff($item) {
                         <h2>Warning</h2>
                     </div>
                 </div>
-            </dix>
+            </div>
     </body>
+
+
+
+
+
+
+    
+    <!-- socket.io  라이브러리 -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+
+        var $park = null;
+        var OFF_TIME = 1000 * 10; // 자동 off 딜레이 
+
+        var modal = document.getElementById('dialog');
+        var warning = document.getElementById('dialog2');
+        var times = 1;
+        var loop;
+        var sound = document.getElementById('audio');
+        var $fire = $("#fire");
+        var $falling = $("#falling");
+        var $emerg = $("#emerg");
+
+        modal.addEventListener('click', function() {
+            modal.style.display = "none";
+            sound.load();
+            console.log("modal touch");
+            times = 0;
+            clearInterval(loop);
+        }, false);
+
+        warning.addEventListener('click', function() {
+            warning.style.display = "none";
+            sound.load();
+            console.log("warning touch");
+            times = 0;
+            clearInterval(loop);
+            autoOff($fire);
+            autoOff($falling);
+            autoOff($emerg);
+        }, false);
+
+        var span = document.getElementsByClassName("close")[0];
+        var span2 = document.getElementsByClassName("close2")[0];
+        modal.style.display = "block";
+
+        span.addEventListener('click', function() {
+            modal.style.display = "none";
+            sound.load();
+            console.log("modal touch");
+            times = 0;
+            clearInterval(loop);
+            autoOff($fire);
+            autoOff($falling);
+            autoOff($emerg);
+        }, false);
+
+        span2.addEventListener('click', function() {
+            warning.style.display = "none";
+            sound.load();
+            console.log("warning touch");
+            times = 0;
+            clearInterval(loop);
+            autoOff($fire);
+            autoOff($falling);
+            autoOff($emerg);
+        }, false);
+
+        function repeat() {
+            console.log("repeat");
+            sound.play();
+        }
+
+        var socket = io.connect("http://aduino.herokuapp.com/"); //소캣 연결 시작 
+
+        socket.on('connect', function() {
+            socket.on('alarm-check', function(data) {
+                if (data.result == 'ok') {
+                    var sensorValue = data.msg;
+
+                    if (sensorValue.indexOf("fire-on") > -1) {
+
+                        $fire.removeClass("bg-success").addClass("bg-danger");
+
+                        sound.pause(); //just bind play/pause to some onclick events on your page
+                        sound.play();
+                        //autoOff($fire);
+
+                        loop = setInterval(repeat, 3000);
+
+                        //repeat();          
+                        warning.style.display = "block";
+
+                    } else if (data.msg.indexOf("falling-on") > -1) {
+                        $falling.removeClass("bg-success").addClass("bg-danger");
+
+                        sound.pause(); //just bind play/pause to some onclick events on your page
+                        sound.play();
+                        //autoOff($falling);
+
+                        loop = setInterval(repeat, 3000);
+
+                        warning.style.display = "block";  
+                    } else if (data.msg.indexOf("emerg-on") > -1) {
+                        $emerg.removeClass("bg-success").addClass("bg-danger");
+
+                        sound.pause(); //just bind play/pause to some onclick events on your page
+                        sound.play();
+
+
+                        loop = setInterval(repeat, 3000);
+
+                        warning.style.display = "block";
+                    }
+
+
+                }
+
+            });
+
+        });
+        function autoOff($item) {
+            setTimeout(function() {
+                $item.removeClass("bg-danger").addClass("bg-success");
+            }, OFF_TIME);
+        }
+
+    </script>
 
 
 </html>
