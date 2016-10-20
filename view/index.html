@@ -79,48 +79,15 @@
 
     </style>
 
-    <body>
-        <audio id="audio">
-        <source src="a.wav" type="audio/wav">
-        </audio>
-        <h1 style="text-align:center; margin-top: 30px;margin-bottom: 30px;">Safety Cap</h1>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-12">
-                    <button type="button" id="fire" style="height: 100px;" class="btn bg-success btn-lg btn-block">Fire Alarm</button>
-                    <button type="button" id="falling" style="margin-top: 20px; height: 100px;" class="btn btn-lg btn-block bg-success">Falling Alarm</button>
-                    <button type="button" id="emerg" style="margin-top: 20px; height: 100px;" class="btn bg-success btn-lg btn-block">Emergency</button>
-                </div>
-                <div class="col-xs-5"></div>
-                <div class="col-xs-2">
-                </div>
-                <div class="col-xs-5"></div>
-            </div>
-        </div>
-        <div id="dialog" class="modal">
-            <div class="modal-content">
-                <span class="close">X</span>
-                <div align="center">
-                    <h4>Welcome to Visit Safe Cap</h4>
-                    <h6>This message will disappear when you touch me.</h6>
-                </div>
-            </div>
-        </dix>
 
-        <div id="dialog2" class="warning">
-            <div class="modal-content">
-                <span class="close2">X</span>
-                <div align="center">
-                    <h2>Warning</h2>
-                </div>
-            </div>
-        </dix>
-    </body>
+
+
+    
     <!-- socket.io  라이브러리 -->
     <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript">
 
-            var $park = null;
+        var $park = null;
 var OFF_TIME = 1000 * 10; // 자동 off 딜레이 
 
 var modal = document.getElementById('dialog');
@@ -240,5 +207,44 @@ function autoOff($item) {
 }
 
 </script>
+
+    <body>
+        <audio id="audio">
+            <source src="a.wav" type="audio/wav">
+            </audio>
+            <h1 style="text-align:center; margin-top: 30px;margin-bottom: 30px;">Safety Cap</h1>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <button type="button" id="fire" style="height: 100px;" class="btn bg-success btn-lg btn-block">Fire Alarm</button>
+                        <button type="button" id="falling" style="margin-top: 20px; height: 100px;" class="btn btn-lg btn-block bg-success">Falling Alarm</button>
+                        <button type="button" id="emerg" style="margin-top: 20px; height: 100px;" class="btn bg-success btn-lg btn-block">Emergency</button>
+                    </div>
+                    <div class="col-xs-5"></div>
+                    <div class="col-xs-2">
+                    </div>
+                    <div class="col-xs-5"></div>
+                </div>
+            </div>
+            <div id="dialog" class="modal">
+                <div class="modal-content">
+                    <span class="close">X</span>
+                    <div align="center">
+                        <h4>Welcome to Visit Safe Cap</h4>
+                        <h6>This message will disappear when you touch me.</h6>
+                    </div>
+                </div>
+            </dix>
+
+            <div id="dialog2" class="warning">
+                <div class="modal-content">
+                    <span class="close2">X</span>
+                    <div align="center">
+                        <h2>Warning</h2>
+                    </div>
+                </div>
+            </dix>
+    </body>
+
 
 </html>
