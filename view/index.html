@@ -139,15 +139,16 @@ socket.on('connect', function() {
                 var sound = document.getElementById('audio');
                 sound.pause(); //just bind play/pause to some onclick events on your page
                 sound.play();
-                autoOff($fire);
+                //autoOff($fire);
 
                 loop = setInterval(repeat, 3000);
                 times = 1;
                 function repeat() {
                     console.log(times);
-                    if (times === 0) {
+                    if (times == 0) {
                         console.log("clear");
                         clearInterval(loop);
+                        autoOff($fire);
                     }
                     sound.play();
                 }
@@ -163,14 +164,15 @@ socket.on('connect', function() {
                 var sound = document.getElementById('audio');
                 sound.pause(); //just bind play/pause to some onclick events on your page
                 sound.play();
-                autoOff($falling);
+                //autoOff($falling);
 
                 loop = setInterval(repeat, 3000);
                 times = 1;
                 function repeat() {
                     console.log(times);
-                    if (times === 0) {
+                    if (times == 0) {
                         clearInterval(loop);
+                        autoOff($falling);
                     }
                     sound.play();
                 }
@@ -182,14 +184,15 @@ socket.on('connect', function() {
                 var sound = document.getElementById('audio');
                 sound.pause(); //just bind play/pause to some onclick events on your page
                 sound.play();
-                autoOff($emerg);
+            
 
                 loop = setInterval(repeat, 3000);
                 times = 1;
                 function repeat() {
                     console.log(times);
-                    if (times === 0) {
+                    if (times == 0) {
                         clearInterval(loop);
+                        autoOff($emerg);
                     }
                     sound.play();
                 }
