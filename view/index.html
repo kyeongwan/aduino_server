@@ -106,6 +106,9 @@ var modal = document.getElementById('dialog');
 var times = 1;
 var loop;
 var sound = document.getElementById('audio');
+var $fire = $("#fire");
+var $falling = $("#falling");
+var $emerg = $("#emerg");
 
 modal.addEventListener('click', function() {
     modal.style.display = "none";
@@ -124,6 +127,9 @@ span.addEventListener('click', function() {
     console.log("modal touch");
     times = 0;
     clearInterval(loop);
+    autoOff($fire);
+    autoOff($falling);
+    autoOff($emerg);
 }, false);
 
 function repeat() {
@@ -139,7 +145,7 @@ socket.on('connect', function() {
             var sensorValue = data.msg;
 
             if (sensorValue.indexOf("fire-on") > -1) {
-                var $fire = $("#fire");
+            
                 $fire.removeClass("bg-success").addClass("bg-danger");
 
                 sound.pause(); //just bind play/pause to some onclick events on your page
@@ -151,11 +157,7 @@ socket.on('connect', function() {
                 //repeat();          
                 modal.style.display = "block";
 
-
-
-
             } else if (data.msg.indexOf("falling-on") > -1) {
-                var $falling = $("#falling");
                 $falling.removeClass("bg-success").addClass("bg-danger");
             
                 sound.pause(); //just bind play/pause to some onclick events on your page
@@ -166,7 +168,6 @@ socket.on('connect', function() {
             
                 modal.style.display = "block";  
             } else if (data.msg.indexOf("emerg-on") > -1) {
-                var $emerg = $("#emerg");
                 $emerg.removeClass("bg-success").addClass("bg-danger");
             
                 sound.pause(); //just bind play/pause to some onclick events on your page
