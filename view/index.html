@@ -110,7 +110,7 @@ modal.addEventListener('click', function() {
     sound.load();
     console.log("modal touch");
 }, false);
-
+var times = 1;
 var span = document.getElementsByClassName("close")[0];
 modal.style.display = "block";
 
@@ -119,6 +119,7 @@ span.addEventListener('click', function() {
     var sound = document.getElementById('audio');
     sound.load();
     console.log("modal touch");
+    times = 0;
 }, false);
 
 var socket = io.connect("http://aduino.herokuapp.com/"); //소캣 연결 시작 
@@ -136,11 +137,9 @@ socket.on('connect', function() {
                 sound.play();
                 autoOff($fire);
 
-                var times = 4;
                 var loop = setInterval(repeat, 2000);
-
+                times = 1;
                 function repeat() {
-                    times--;
                     console.log(times);
                     if (times === 0) {
                         clearInterval(loop);
@@ -148,6 +147,7 @@ socket.on('connect', function() {
                     sound.play();
                 }
                 repeat();          
+                modal.style.display = "block";
 
 
 
@@ -159,6 +159,18 @@ socket.on('connect', function() {
                 sound.pause(); //just bind play/pause to some onclick events on your page
                 sound.play();
                 autoOff($falling);
+
+                var loop = setInterval(repeat, 2000);
+                times = 1;
+                function repeat() {
+                    console.log(times);
+                    if (times === 0) {
+                        clearInterval(loop);
+                    }
+                    sound.play();
+                }
+                repeat();   
+                modal.style.display = "block";  
             } else if (data.msg.indexOf("emerg-on") > -1) {
                 var $emerg = $("#emerg");
                 $emerg.removeClass("bg-success").addClass("bg-danger");
@@ -166,6 +178,18 @@ socket.on('connect', function() {
                 sound.pause(); //just bind play/pause to some onclick events on your page
                 sound.play();
                 autoOff($emerg);
+
+                var loop = setInterval(repeat, 2000);
+                times = 1;
+                function repeat() {
+                    console.log(times);
+                    if (times === 0) {
+                        clearInterval(loop);
+                    }
+                    sound.play();
+                }
+                repeat();     
+                modal.style.display = "block";
             }
 
 
